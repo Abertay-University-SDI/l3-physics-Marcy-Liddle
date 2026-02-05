@@ -1,6 +1,7 @@
 #pragma once
 #include "Framework/GameObject.h"
 #include "Framework/Animation.h"
+#include "Framework/Collision.h"
 
 class Sheep :
 	public GameObject
@@ -15,6 +16,9 @@ public:
 
 	void checkWallAndBounce();
 	void setWorldSize(sf::Vector2f);
+
+	void collisionResponse(GameObject& collider) override;
+	
 
 private:
 	 /*

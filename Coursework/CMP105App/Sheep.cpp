@@ -32,6 +32,8 @@ Sheep::Sheep()
 
 	m_currentAnimation = &m_walkDown;
 	setTextureRect(m_currentAnimation->getCurrentFrame());
+
+	setCollisionBox(2, 2, 60, 60);
 }
 
 Sheep::~Sheep()
@@ -131,5 +133,12 @@ void Sheep::checkWallAndBounce()
 void Sheep::setWorldSize(sf::Vector2f worldSize)
 {
 	m_worldSize = worldSize;
+
+}
+
+
+void Sheep::collisionResponse(GameObject& collider)
+{
+
 
 }
