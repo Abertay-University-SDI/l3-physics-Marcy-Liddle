@@ -109,9 +109,6 @@ void Sheep::update(float dt)
 	checkWallAndBounce();
 
 	move(m_velocity);
-
-	
-
 	
 }
 
@@ -139,6 +136,9 @@ void Sheep::setWorldSize(sf::Vector2f worldSize)
 
 void Sheep::collisionResponse(GameObject& collider)
 {
+	m_velocity *= -COEFF_OF_RESTITUTION;
 
-
+	if (m_velocity.lengthSquared() < 200)
+		move(m_velocity * 0.5f);
+	else move(m_velocity * 0.05f);	// clear the zone
 }

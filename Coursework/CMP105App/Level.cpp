@@ -68,8 +68,29 @@ void Level::update(float dt)
 	view.setCenter(pos);
 	m_window.setView(view);
 
+	if (m_shakeTimer > 0)
+	{
+		m_shakeTimer -= dt;
+
+		float offsetX = (rand() % 10) - 5.f;
+		float offsetY = (rand() % 10) - 5.f;
+
+		view.move({ offsetX, offsetY });
+
+	}
+
 	m_sheep.update(dt);
-	for (auto pig : m_pigPointers) pig->update(dt);
+	for (auto pig : m_pigPointers)
+	{
+		pig->update(dt);
+
+		if (Collision::checkBoundingBox(m_sheep, *pig))
+		{
+			pig->collisionResponse(m_sheep);
+			m_sheep.collisionResponse(*pig);
+			m_shakeTimer = SHAKE_TIME;
+		}
+	}
 }
 
 // Render level
