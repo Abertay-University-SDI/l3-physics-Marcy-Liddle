@@ -65,10 +65,11 @@ void Level::update(float dt)
 	// keep the sheep centered
 	sf::Vector2f pos = m_sheep.getPosition();
 	sf::View view = m_window.getView();
-	view.setCenter(pos);
-	m_window.setView(view);
 
-	if (m_shakeTimer > 0)
+	view.setCenter(pos);
+	
+
+	if (m_shakeTimer > 0.f)
 	{
 		m_shakeTimer -= dt;
 
@@ -78,6 +79,7 @@ void Level::update(float dt)
 		view.move({ offsetX, offsetY });
 
 	}
+	m_window.setView(view);
 
 	m_sheep.update(dt);
 	for (auto pig : m_pigPointers)
